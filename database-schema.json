@@ -1,0 +1,833 @@
+{
+  "tables": {
+    "pbe_binder_cards": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_binder_cards_id_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "binderid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "ownedcardid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "position",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_binder_cards_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "constraint_name": "unique_binder_position",
+          "constraint_type": "u",
+          "definition": "UNIQUE (binderid, \"position\")"
+        },
+        {
+          "constraint_name": "fk_pbe_binder_cards_binderid",
+          "constraint_type": "f",
+          "definition": "FOREIGN KEY (binderid) REFERENCES pbe_binders(binderid) ON DELETE CASCADE"
+        },
+        {
+          "constraint_name": "fk_pbe_binder_cards_ownedcardid",
+          "constraint_type": "f",
+          "definition": "FOREIGN KEY (ownedcardid) REFERENCES pbe_collection(ownedcardid) ON DELETE CASCADE"
+        }
+      ]
+    },
+    "pbe_binders": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "binderid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_binders_binderid_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "uid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "binder_name",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "binder_desc",
+          "data_type": "text",
+          "udt_name": "text",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_binders_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (binderid)"
+        }
+      ]
+    },
+    "pbe_cards": {
+      "description": "Trading cards for ISFL, DSFL, and WFC",
+      "columns": [
+        {
+          "column_name": "cardid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_cards_cardid_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "teamid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "playerid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "leagueid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "author_userid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "card_rarity",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 50
+        },
+        {
+          "column_name": "sub_type",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 50
+        },
+        {
+          "column_name": "player_name",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "render_name",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "position",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 25
+        },
+        {
+          "column_name": "season",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "pullable",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": "true",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "approved",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": "false",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "author_paid",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": "false",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "image_url",
+          "data_type": "text",
+          "udt_name": "text",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "date_approved",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "legacy_card_id",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 24
+        },
+        {
+          "column_name": "event_pullable",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": "false",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_cards_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (cardid)"
+        }
+      ]
+    },
+    "pbe_cards_backup_rarity": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "cardid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "teamid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "playerid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "leagueid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "author_userid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "card_rarity",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": 50
+        },
+        {
+          "column_name": "sub_type",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": 50
+        },
+        {
+          "column_name": "player_name",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "render_name",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "position",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": 25
+        },
+        {
+          "column_name": "season",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "pullable",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "approved",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "author_paid",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "image_url",
+          "data_type": "text",
+          "udt_name": "text",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "date_approved",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "legacy_card_id",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": 24
+        }
+      ],
+      "constraints": []
+    },
+    "pbe_collection": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "ownedcardid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_collection_ownedcardid_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "userid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "cardid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "packid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_collection_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (ownedcardid)"
+        },
+        {
+          "constraint_name": "fk_pbe_collection_cardid",
+          "constraint_type": "f",
+          "definition": "FOREIGN KEY (cardid) REFERENCES pbe_cards(cardid) ON DELETE CASCADE"
+        }
+      ]
+    },
+    "pbe_packs_owned": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "packid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_packs_owned_packid_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "userid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "packtype",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 50
+        },
+        {
+          "column_name": "opened",
+          "data_type": "boolean",
+          "udt_name": "bool",
+          "column_default": "false",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "purchasedate",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": "CURRENT_TIMESTAMP",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "opendate",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "source",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 100
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_packs_owned_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (packid)"
+        }
+      ]
+    },
+    "pbe_settings": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "userid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "subscription",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "0",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "rubysubscription",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "0",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": "CURRENT_TIMESTAMP",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": "CURRENT_TIMESTAMP",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_settings_subscription_check",
+          "constraint_type": "c",
+          "definition": "CHECK (((subscription >= 0) AND (subscription <= 3)))"
+        },
+        {
+          "constraint_name": "pbe_settings_rubysubscription_check",
+          "constraint_type": "c",
+          "definition": "CHECK (((rubysubscription >= 0) AND (rubysubscription <= 3)))"
+        },
+        {
+          "constraint_name": "pbe_settings_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (userid)"
+        }
+      ]
+    },
+    "pbe_team_data": {
+      "description": "Team information for ISFL, DSFL, and WFC",
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_team_data_id_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "teamid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "leagueid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "season",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "name",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "nickname",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "abbreviation",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": 10
+        },
+        {
+          "column_name": "location",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 100
+        },
+        {
+          "column_name": "colors",
+          "data_type": "jsonb",
+          "udt_name": "jsonb",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "conference",
+          "data_type": "character varying",
+          "udt_name": "varchar",
+          "column_default": "NULL::character varying",
+          "is_nullable": "YES",
+          "character_maximum_length": 50
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_team_data_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "constraint_name": "unique_team_league_season",
+          "constraint_type": "u",
+          "definition": "UNIQUE (teamid, leagueid, season)"
+        }
+      ]
+    },
+    "pbe_trade_assets": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_trade_assets_id_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "tradeid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "ownedcardid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "toid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "fromid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_trade_assets_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "constraint_name": "fk_pbe_trade_assets_tradeid",
+          "constraint_type": "f",
+          "definition": "FOREIGN KEY (tradeid) REFERENCES pbe_trades(tradeid) ON DELETE CASCADE"
+        },
+        {
+          "constraint_name": "fk_pbe_trade_assets_ownedcardid",
+          "constraint_type": "f",
+          "definition": "FOREIGN KEY (ownedcardid) REFERENCES pbe_collection(ownedcardid) ON DELETE CASCADE"
+        }
+      ]
+    },
+    "pbe_trades": {
+      "description": null,
+      "columns": [
+        {
+          "column_name": "tradeid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": "nextval('pbe_trades_tradeid_seq'::regclass)",
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "initiatorid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "recipientid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "NO",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "trade_status",
+          "data_type": "USER-DEFINED",
+          "udt_name": "trade_status_enum",
+          "column_default": "'PENDING'::trade_status_enum",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "declineuserid",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "column_default": null,
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "create_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": "CURRENT_TIMESTAMP",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "update_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "column_default": "CURRENT_TIMESTAMP",
+          "is_nullable": "YES",
+          "character_maximum_length": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_name": "pbe_trades_pkey",
+          "constraint_type": "p",
+          "definition": "PRIMARY KEY (tradeid)"
+        }
+      ]
+    }
+  },
+  "views": {
+    "pbe_owned_cards": {
+      "description": null,
+      "definition": " SELECT min(ownedcardid) AS ownedcardid,\n    userid,\n    cardid,\n    min(packid) AS packid,\n    count(*)::integer AS quantity\n   FROM pbe_collection\n  GROUP BY userid, cardid;"
+    },
+    "pbe_pack_today": {
+      "description": "Auto-updating count of packs purchased today (base, ruby/ultimus, throwback, event) - resets daily at midnight EST (America/New_York timezone). Assumes purchasedate is stored in UTC.",
+      "definition": " SELECT userid,\n    count(*) FILTER (WHERE packtype::text = 'base'::text)::integer AS base,\n    count(*) FILTER (WHERE packtype::text = 'ruby'::text)::integer AS ruby,\n    count(*) FILTER (WHERE packtype::text = 'throwback'::text)::integer AS throwback,\n    count(*) FILTER (WHERE packtype::text = 'event'::text)::integer AS event,\n    (CURRENT_TIMESTAMP AT TIME ZONE 'America/New_York'::text)::date AS date\n   FROM pbe_packs_owned\n  WHERE date(((purchasedate AT TIME ZONE 'UTC'::text) AT TIME ZONE 'America/New_York'::text)) = (CURRENT_TIMESTAMP AT TIME ZONE 'America/New_York'::text)::date\n  GROUP BY userid;"
+    },
+    "trade_details": {
+      "description": "Denormalized view of trade data joining trades, trade assets, collection, and card details",
+      "definition": " SELECT t.tradeid,\n    t.initiatorid,\n    t.recipientid,\n    t.trade_status,\n    ta.ownedcardid,\n    c.cardid,\n    card.image_url,\n    ta.toid,\n    ta.fromid,\n    t.create_date,\n    t.update_date,\n    card.card_rarity,\n    card.sub_type\n   FROM pbe_trades t\n     JOIN pbe_trade_assets ta ON t.tradeid = ta.tradeid\n     JOIN pbe_collection c ON ta.ownedcardid = c.ownedcardid\n     JOIN pbe_cards card ON c.cardid = card.cardid;"
+    },
+    "unique_cards": {
+      "description": null,
+      "definition": " SELECT card_rarity,\n    count(DISTINCT cardid)::integer AS total_count\n   FROM pbe_cards\n  WHERE approved = true AND card_rarity IS NOT NULL\n  GROUP BY card_rarity\n  ORDER BY (\n        CASE card_rarity\n            WHEN 'Common'::text THEN 1\n            WHEN 'Uncommon'::text THEN 2\n            WHEN 'Rare'::text THEN 3\n            WHEN 'Mythic'::text THEN 4\n            ELSE 5\n        END);"
+    },
+    "user_unique_cards": {
+      "description": null,
+      "definition": " WITH user_rarity_counts AS (\n         SELECT oc.userid,\n            cards.card_rarity,\n            count(DISTINCT oc.cardid)::integer AS owned_count\n           FROM pbe_owned_cards oc\n             JOIN pbe_cards cards ON oc.cardid = cards.cardid\n          WHERE cards.approved = true AND cards.card_rarity IS NOT NULL\n          GROUP BY oc.userid, cards.card_rarity\n        ), ranked_users AS (\n         SELECT user_rarity_counts.userid,\n            user_rarity_counts.card_rarity,\n            user_rarity_counts.owned_count,\n            dense_rank() OVER (PARTITION BY user_rarity_counts.card_rarity ORDER BY user_rarity_counts.owned_count DESC) AS rarity_rank\n           FROM user_rarity_counts\n        )\n SELECT userid,\n    card_rarity,\n    owned_count,\n    rarity_rank\n   FROM ranked_users r\n  ORDER BY (\n        CASE card_rarity\n            WHEN 'Common'::text THEN 1\n            WHEN 'Uncommon'::text THEN 2\n            WHEN 'Rare'::text THEN 3\n            WHEN 'Mythic'::text THEN 4\n            ELSE 5\n        END), rarity_rank;"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+
+[
+  {
+    "column_name": "cardid",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('pbe_cards_cardid_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "column_name": "teamid",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "column_name": "playerid",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "column_name": "leagueid",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "column_name": "author_userid",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "column_name": "card_rarity",
+    "data_type": "character varying",
+    "character_maximum_length": 50,
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "column_name": "sub_type",
+    "data_type": "character varying",
+    "character_maximum_length": 50,
+    "is_nullable": "YES",
+    "column_default": "NULL::character varying",
+    "ordinal_position": 7
+  },
+  {
+    "column_name": "player_name",
+    "data_type": "character varying",
+    "character_maximum_length": 100,
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "column_name": "render_name",
+    "data_type": "character varying",
+    "character_maximum_length": 100,
+    "is_nullable": "YES",
+    "column_default": "NULL::character varying",
+    "ordinal_position": 9
+  },
+  {
+    "column_name": "position",
+    "data_type": "character varying",
+    "character_maximum_length": 25,
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 10
+  },
+  {
+    "column_name": "season",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 25
+  },
+  {
+    "column_name": "pullable",
+    "data_type": "boolean",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "true",
+    "ordinal_position": 26
+  },
+  {
+    "column_name": "approved",

@@ -1,0 +1,19 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/distribute-subscriptions",
+      "schedule": "0 5 * * *"
+    },
+    {
+      "path": "/api/cron/retire-old-cards",
+      "schedule": "0 17 * * 6"
+    }
+  ],
+  "functions": {
+    "pages/api/v3/cards/*/image.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  },
+  "regions": ["iad1"]
+}
